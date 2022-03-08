@@ -3,6 +3,7 @@ using Api.Controllers;
 using Api.Models;
 using Data;
 using Moq;
+using System.Text.Json;
 using System.Collections.Generic;
 
 namespace Api.Test;
@@ -104,7 +105,7 @@ public class HomeControllerTests
 
         var actual = await _testObject.GetAlbumsByArtist(artistId);
 
-        Assert.Equal(expected, actual.Albums);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
     }
 
     [Fact]
@@ -209,7 +210,7 @@ public class HomeControllerTests
 
         var actual = await _testObject.SearchByAlbumName("OtHEr");
 
-        Assert.Equal(expected, actual.Albums);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
     }
 
     [Fact]
@@ -256,7 +257,7 @@ public class HomeControllerTests
 
         var actual = await _testObject.SearchBySongName("OtHEr");
 
-        Assert.Equal(expected, actual.Songs);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Songs));
     }
 
     [Fact]
@@ -345,6 +346,6 @@ public class HomeControllerTests
 
         var actual = await _testObject.GetAlbumsByYear(2001);
 
-        Assert.Equal(expected, actual.Albums);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
     }
 }

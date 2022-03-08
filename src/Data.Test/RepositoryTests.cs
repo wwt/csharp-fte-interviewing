@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Xunit;
 using Data.Models;
 
@@ -89,7 +90,7 @@ public class RepositoryTests
         };
         var actual = _testObject.GetAllAlbums();
 
-        Assert.Equal(expected, actual);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
@@ -102,7 +103,7 @@ public class RepositoryTests
         };
         var actual = _testObject.GetAllArtists();
 
-        Assert.Equal(expected, actual);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
@@ -121,7 +122,7 @@ public class RepositoryTests
         };
         var actual = _testObject.GetAllSongs();
 
-        Assert.Equal(expected, actual);
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
