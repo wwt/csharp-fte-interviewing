@@ -45,21 +45,24 @@ public class HomeControllerTests
     [Fact]
     public async void GetAlbumsByArtist_ReturnsAlbumsWhenArtistFound()
     {
-        var expected = new List<Album>
+        var expected = new GetAlbumsByArtistResponse
         {
-            new Album
+            Albums = new List<Album>
             {
-                Artist = new Artist { Name = "No name person" },
-                ReleaseDate = 2001,
-                Title = "My new album",
-                Songs = new List<Song> { new Song { Title = "My first song" } }
-            },
-            new Album
-            {
-                Artist = new Artist { Name = "No name person" },
-                ReleaseDate = 1901,
-                Title = "My oldest album",
-                Songs = new List<Song> { new Song { Title = "My second song" } }
+                new Album
+                {
+                    Artist = new Artist { Name = "No name person" },
+                    ReleaseDate = 2001,
+                    Title = "My new album",
+                    Songs = new List<Song> { new Song { Title = "My first song" } }
+                },
+                new Album
+                {
+                    Artist = new Artist { Name = "No name person" },
+                    ReleaseDate = 1901,
+                    Title = "My oldest album",
+                    Songs = new List<Song> { new Song { Title = "My second song" } }
+                }
             }
         };
         var artistId = 164;
@@ -105,7 +108,7 @@ public class HomeControllerTests
 
         var actual = await _testObject.GetAlbumsByArtist(artistId);
 
-        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
@@ -148,21 +151,24 @@ public class HomeControllerTests
     [Fact]
     public async void SearchByAlbumName_ReturnsAlbumsWhenAlbumsFound()
     {
-        var expected = new List<Album>
+        var expected = new SearchByAlbumNameResponse
         {
-            new Album
+            Albums = new List<Album>
             {
-                Artist = new Artist { Name = "Random person" },
-                ReleaseDate = 1985,
-                Title = "My other album",
-                Songs = new List<Song> { new Song { Title = "My second song" } }
-            },
-            new Album
-            {
-                Artist = new Artist { Name = "Unknown person" },
-                ReleaseDate = 2011,
-                Title = "Some other album",
-                Songs = new List<Song> { new Song { Title = "My first song" } }
+                new Album
+                {
+                    Artist = new Artist { Name = "Random person" },
+                    ReleaseDate = 2011,
+                    Title = "Some other album",
+                    Songs = new List<Song> { new Song { Title = "My first song" } }
+                },
+                new Album
+                {
+                    Artist = new Artist { Name = "Unknown person" },
+                    ReleaseDate = 1985,
+                    Title = "My other album",
+                    Songs = new List<Song> { new Song { Title = "My second song" } }
+                },
             }
         };
         var songId1 = 14;
@@ -197,10 +203,10 @@ public class HomeControllerTests
             );
         _mockRepository
             .Setup(m => m.GetArtist(164))
-            .Returns(new Data.Models.Artist { Id = 5473, Name = "Unknown person" });
+            .Returns(new Data.Models.Artist { Id = 164, Name = "Unknown person" });
         _mockRepository
             .Setup(m => m.GetArtist(5473))
-            .Returns(new Data.Models.Artist { Id = 164, Name = "Random person" });
+            .Returns(new Data.Models.Artist { Id = 5473, Name = "Random person" });
         _mockRepository
             .Setup(m => m.GetSong(songId1))
             .Returns(new Data.Models.Song { Id = songId1, Title = "My first song" });
@@ -210,7 +216,7 @@ public class HomeControllerTests
 
         var actual = await _testObject.SearchByAlbumName("OtHEr");
 
-        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
@@ -221,8 +227,8 @@ public class HomeControllerTests
             .Returns(
                 new List<Data.Models.Song>
                 {
-                    new Data.Models.Song { Title = "My first album", },
-                    new Data.Models.Song { Title = "My second album", },
+                    new Data.Models.Song { Title = "My first song", },
+                    new Data.Models.Song { Title = "My second song", },
                 }
             );
         var actual = await _testObject.SearchBySongName("not going to find it");
@@ -232,32 +238,26 @@ public class HomeControllerTests
     }
 
     [Fact]
-    public async void SearchBySongName_ReturnsAlbumsWhenSongsMatch()
+    public async void SearchBySongName_ReturnsSongsMatchingName()
     {
-        var expected = new List<Song>
+        var expected = new SearchBySongNameResponse
         {
-            new Song { Title = "My first song", },
-            new Song { Title = "One hit wonder", }
+            Songs = new List<Song> { new Song { Title = "One hit wonder", } }
         };
-        var songId1 = 14;
-        var songId2 = 578;
 
         _mockRepository
-            .Setup(m => m.GetArtist(164))
-            .Returns(new Data.Models.Artist { Id = 5473, Name = "Unknown person" });
-        _mockRepository
-            .Setup(m => m.GetArtist(5473))
-            .Returns(new Data.Models.Artist { Id = 164, Name = "Random person" });
-        _mockRepository
-            .Setup(m => m.GetSong(songId1))
-            .Returns(new Data.Models.Song { Id = songId1, Title = "My first song" });
-        _mockRepository
-            .Setup(m => m.GetSong(songId2))
-            .Returns(new Data.Models.Song { Id = songId2, Title = "My second song" });
+            .Setup(m => m.GetAllSongs())
+            .Returns(
+                new List<Data.Models.Song>
+                {
+                    new Data.Models.Song { Title = "My first song", },
+                    new Data.Models.Song { Title = "One hit wonder", },
+                }
+            );
 
-        var actual = await _testObject.SearchBySongName("OtHEr");
+        var actual = await _testObject.SearchBySongName("hIt");
 
-        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Songs));
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 
     [Fact]
@@ -284,23 +284,26 @@ public class HomeControllerTests
     }
 
     [Fact]
-    public async void GetAlbumsByYear_ReturnsAlbumsWhenSongsMatch()
+    public async void GetAlbumsByYear_ReturnsAlbumsWhenYearFound()
     {
-        var expected = new List<Album>
+        var expected = new GetAlbumsByYearResponse
         {
-            new Album
+            Albums = new List<Album>
             {
-                Artist = new Artist { Name = "No name person" },
-                ReleaseDate = 2001,
-                Title = "My new album",
-                Songs = new List<Song> { new Song { Title = "My first song" } }
-            },
-            new Album
-            {
-                Artist = new Artist { Name = "No name person" },
-                ReleaseDate = 2001,
-                Title = "Some other album",
-                Songs = new List<Song> { new Song { Title = "My first song" } }
+                new Album
+                {
+                    Artist = new Artist { Name = "No name person" },
+                    ReleaseDate = 2001,
+                    Title = "My new album",
+                    Songs = new List<Song> { new Song { Title = "My first song" } }
+                },
+                new Album
+                {
+                    Artist = new Artist { Name = "No name person" },
+                    ReleaseDate = 2001,
+                    Title = "Some other album",
+                    Songs = new List<Song> { new Song { Title = "My first song" } }
+                }
             }
         };
         var songId1 = 14;
@@ -346,6 +349,6 @@ public class HomeControllerTests
 
         var actual = await _testObject.GetAlbumsByYear(2001);
 
-        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual.Albums));
+        Assert.Equal(JsonSerializer.Serialize(expected), JsonSerializer.Serialize(actual));
     }
 }

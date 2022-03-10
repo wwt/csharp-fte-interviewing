@@ -15,7 +15,7 @@ public class Album
             && Id == album.Id
             && Title == album.Title
             && ReleaseDate == album.ReleaseDate
-            && EqualityComparer<List<int>>.Default.Equals(SongIds, album.SongIds);
+            && SongIds.SequenceEqual(album.SongIds);
     }
 
     public override int GetHashCode()
