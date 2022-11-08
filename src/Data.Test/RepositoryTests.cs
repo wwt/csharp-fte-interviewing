@@ -11,9 +11,9 @@ public class RepositoryTests
 
     public RepositoryTests()
     {
-        var albums = new List<Album>
+        var albums = new List<AlbumEntity>
         {
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 1,
@@ -21,7 +21,7 @@ public class RepositoryTests
                 SongIds = new List<int> { 1, 2, 3 },
                 Title = "Album 1"
             },
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 2,
                 Id = 2,
@@ -29,7 +29,7 @@ public class RepositoryTests
                 SongIds = new List<int> { 4, 5, 6 },
                 Title = "Album 2"
             },
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 3,
@@ -38,21 +38,21 @@ public class RepositoryTests
                 Title = "Album 3"
             },
         }.ToDictionary(el => el.Id);
-        var artists = new List<Artist>
+        var artists = new List<ArtistEntity>
         {
-            new Artist { Id = 1, Name = "Artist 1" },
-            new Artist { Id = 2, Name = "Artist 2" },
+            new ArtistEntity { Id = 1, Name = "Artist 1" },
+            new ArtistEntity { Id = 2, Name = "Artist 2" },
         }.ToDictionary(el => el.Id);
-        var songs = new List<Song>
+        var songs = new List<SongEntity>
         {
-            new Song { Id = 1, Title = "Song 1" },
-            new Song { Id = 2, Title = "Song 2" },
-            new Song { Id = 3, Title = "Song 3" },
-            new Song { Id = 4, Title = "Song 4" },
-            new Song { Id = 5, Title = "Song 5" },
-            new Song { Id = 6, Title = "Song 6" },
-            new Song { Id = 7, Title = "Song 7" },
-            new Song { Id = 8, Title = "Song 8" },
+            new SongEntity { Id = 1, Title = "Song 1" },
+            new SongEntity { Id = 2, Title = "Song 2" },
+            new SongEntity { Id = 3, Title = "Song 3" },
+            new SongEntity { Id = 4, Title = "Song 4" },
+            new SongEntity { Id = 5, Title = "Song 5" },
+            new SongEntity { Id = 6, Title = "Song 6" },
+            new SongEntity { Id = 7, Title = "Song 7" },
+            new SongEntity { Id = 8, Title = "Song 8" },
         }.ToDictionary(el => el.Id);
         _testObject = new Repository(albums, artists, songs);
     }
@@ -60,9 +60,9 @@ public class RepositoryTests
     [Fact]
     public void GetAllAlbums_ReturnsAllAlbums()
     {
-        var expected = new List<Album>
+        var expected = new List<AlbumEntity>
         {
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 1,
@@ -70,7 +70,7 @@ public class RepositoryTests
                 SongIds = new List<int> { 1, 2, 3 },
                 Title = "Album 1"
             },
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 2,
                 Id = 2,
@@ -78,7 +78,7 @@ public class RepositoryTests
                 SongIds = new List<int> { 4, 5, 6 },
                 Title = "Album 2"
             },
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 3,
@@ -95,10 +95,10 @@ public class RepositoryTests
     [Fact]
     public void GetAllArtists_ReturnsAllArtists()
     {
-        var expected = new List<Artist>
+        var expected = new List<ArtistEntity>
         {
-            new Artist { Id = 1, Name = "Artist 1" },
-            new Artist { Id = 2, Name = "Artist 2" },
+            new ArtistEntity { Id = 1, Name = "Artist 1" },
+            new ArtistEntity { Id = 2, Name = "Artist 2" },
         };
         var actual = _testObject.GetAllArtists();
 
@@ -108,16 +108,16 @@ public class RepositoryTests
     [Fact]
     public void GetAllSongs_ReturnsAllSongs()
     {
-        var expected = new List<Song>
+        var expected = new List<SongEntity>
         {
-            new Song { Id = 1, Title = "Song 1" },
-            new Song { Id = 2, Title = "Song 2" },
-            new Song { Id = 3, Title = "Song 3" },
-            new Song { Id = 4, Title = "Song 4" },
-            new Song { Id = 5, Title = "Song 5" },
-            new Song { Id = 6, Title = "Song 6" },
-            new Song { Id = 7, Title = "Song 7" },
-            new Song { Id = 8, Title = "Song 8" },
+            new SongEntity { Id = 1, Title = "Song 1" },
+            new SongEntity { Id = 2, Title = "Song 2" },
+            new SongEntity { Id = 3, Title = "Song 3" },
+            new SongEntity { Id = 4, Title = "Song 4" },
+            new SongEntity { Id = 5, Title = "Song 5" },
+            new SongEntity { Id = 6, Title = "Song 6" },
+            new SongEntity { Id = 7, Title = "Song 7" },
+            new SongEntity { Id = 8, Title = "Song 8" },
         };
         var actual = _testObject.GetAllSongs();
 
@@ -127,7 +127,7 @@ public class RepositoryTests
     [Fact]
     public void GetAlbum_ReturnsRequestedAlbum()
     {
-        var expected = new Album
+        var expected = new AlbumEntity
         {
             ArtistId = 2,
             Id = 2,
@@ -143,7 +143,7 @@ public class RepositoryTests
     [Fact]
     public void GetArtist_ReturnsRequestedArtist()
     {
-        var expected = new Artist { Id = 1, Name = "Artist 1" };
+        var expected = new ArtistEntity { Id = 1, Name = "Artist 1" };
         var actual = _testObject.GetArtist(1);
 
         Assert.Equal(expected, actual);
@@ -152,7 +152,7 @@ public class RepositoryTests
     [Fact]
     public void GetSong_ReturnsRequestedSong()
     {
-        var expected = new Song { Id = 7, Title = "Song 7" };
+        var expected = new SongEntity { Id = 7, Title = "Song 7" };
         var actual = _testObject.GetSong(7);
 
         Assert.Equal(expected, actual);

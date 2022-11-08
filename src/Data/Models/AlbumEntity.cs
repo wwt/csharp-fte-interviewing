@@ -1,6 +1,6 @@
 namespace Data.Models;
 
-public class Album
+public class AlbumEntity
 {
     public int ArtistId { get; set; }
     public int Id { get; set; }
@@ -10,7 +10,7 @@ public class Album
 
     public override bool Equals(object? obj)
     {
-        return obj is Album album
+        return obj is AlbumEntity album
             && ArtistId == album.ArtistId
             && Id == album.Id
             && Title == album.Title

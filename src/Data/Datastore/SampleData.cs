@@ -4,11 +4,11 @@ namespace Data.Datastore;
 
 public static class SampleData
 {
-    public static Dictionary<int, Album> Albums = new Dictionary<int, Album>
+    public static Dictionary<int, AlbumEntity> Albums = new Dictionary<int, AlbumEntity>
     {
         {
             1,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 1,
@@ -19,7 +19,7 @@ public static class SampleData
         },
         {
             2,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 2,
@@ -30,7 +30,7 @@ public static class SampleData
         },
         {
             3,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 2,
                 Id = 3,
@@ -41,7 +41,7 @@ public static class SampleData
         },
         {
             4,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 1,
                 Id = 4,
@@ -52,7 +52,7 @@ public static class SampleData
         },
         {
             5,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 3,
                 Id = 5,
@@ -63,7 +63,7 @@ public static class SampleData
         },
         {
             6,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 4,
                 Id = 6,
@@ -74,7 +74,7 @@ public static class SampleData
         },
         {
             7,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 5,
                 Id = 7,
@@ -85,7 +85,7 @@ public static class SampleData
         },
         {
             8,
-            new Album
+            new AlbumEntity
             {
                 ArtistId = 3,
                 Id = 8,
@@ -96,151 +96,151 @@ public static class SampleData
         },
     };
 
-    public static Dictionary<int, Artist> Artists = new Dictionary<int, Artist>
+    public static Dictionary<int, ArtistEntity> Artists = new Dictionary<int, ArtistEntity>
     {
         {
             1,
-            new Artist { Id = 1, Name = "Leanne Graham" }
+            new ArtistEntity { Id = 1, Name = "Leanne Graham" }
         },
         {
             2,
-            new Artist { Id = 2, Name = "Ervin Howell" }
+            new ArtistEntity { Id = 2, Name = "Ervin Howell" }
         },
         {
             3,
-            new Artist { Id = 3, Name = "Clementine Bauch" }
+            new ArtistEntity { Id = 3, Name = "Clementine Bauch" }
         },
         {
             4,
-            new Artist { Id = 4, Name = "Patricia Lebsack" }
+            new ArtistEntity { Id = 4, Name = "Patricia Lebsack" }
         },
         {
             5,
-            new Artist { Id = 5, Name = "Chelsey Dietrich" }
+            new ArtistEntity { Id = 5, Name = "Chelsey Dietrich" }
         },
     };
 
-    public static Dictionary<int, Song> Songs = new Dictionary<int, Song>
+    public static Dictionary<int, SongEntity> Songs = new Dictionary<int, SongEntity>
     {
         {
             1,
-            new Song { Title = "Lorem ipsum dolor", Id = 1, }
+            new SongEntity { Title = "Lorem ipsum dolor", Id = 1, }
         },
         {
             2,
-            new Song { Title = "ipsum dolor sit amet", Id = 2, }
+            new SongEntity { Title = "ipsum dolor sit amet", Id = 2, }
         },
         {
             3,
-            new Song { Title = "consectetur adipiscing elit", Id = 3, }
+            new SongEntity { Title = "consectetur adipiscing elit", Id = 3, }
         },
         {
             4,
-            new Song { Title = "sed do eiusmod", Id = 4, }
+            new SongEntity { Title = "sed do eiusmod", Id = 4, }
         },
         {
             5,
-            new Song { Title = "adipiscing elit, sed do", Id = 5, }
+            new SongEntity { Title = "adipiscing elit, sed do", Id = 5, }
         },
         {
             6,
-            new Song { Title = "incididunt ut labore", Id = 6, }
+            new SongEntity { Title = "incididunt ut labore", Id = 6, }
         },
         {
             7,
-            new Song { Title = "dolor sit amet, consectetur", Id = 7, }
+            new SongEntity { Title = "dolor sit amet, consectetur", Id = 7, }
         },
         {
             8,
-            new Song { Title = "ipsum dolor sit", Id = 8, }
+            new SongEntity { Title = "ipsum dolor sit", Id = 8, }
         },
         {
             9,
-            new Song { Title = "sit amet", Id = 9, }
+            new SongEntity { Title = "sit amet", Id = 9, }
         },
         {
             10,
-            new Song { Title = "amet", Id = 10, }
+            new SongEntity { Title = "amet", Id = 10, }
         },
         {
             11,
-            new Song { Title = "consequat", Id = 11, }
+            new SongEntity { Title = "consequat", Id = 11, }
         },
         {
             12,
-            new Song { Title = "lorem", Id = 12, }
+            new SongEntity { Title = "lorem", Id = 12, }
         },
         {
             13,
-            new Song { Title = "neque egestas", Id = 13, }
+            new SongEntity { Title = "neque egestas", Id = 13, }
         },
         {
             14,
-            new Song { Title = "A scelerisque purus semper eget", Id = 14, }
+            new SongEntity { Title = "A scelerisque purus semper eget", Id = 14, }
         },
         {
             15,
-            new Song { Title = "etiam tempor orci", Id = 15, }
+            new SongEntity { Title = "etiam tempor orci", Id = 15, }
         },
         {
             21,
-            new Song { Title = "eu", Id = 21, }
+            new SongEntity { Title = "eu", Id = 21, }
         },
         {
             22,
-            new Song { Title = "sed viverra", Id = 22, }
+            new SongEntity { Title = "sed viverra", Id = 22, }
         },
         {
             23,
-            new Song { Title = "lorem", Id = 23, }
+            new SongEntity { Title = "lorem", Id = 23, }
         },
         {
             24,
-            new Song { Title = "scelerisque", Id = 24, }
+            new SongEntity { Title = "scelerisque", Id = 24, }
         },
         {
             25,
-            new Song { Title = "Amet facilisis", Id = 25, }
+            new SongEntity { Title = "Amet facilisis", Id = 25, }
         },
         {
             26,
-            new Song { Title = "pellentesque eu tincidunt", Id = 26, }
+            new SongEntity { Title = "pellentesque eu tincidunt", Id = 26, }
         },
         {
             27,
-            new Song { Title = "Faucibus turpis", Id = 27, }
+            new SongEntity { Title = "Faucibus turpis", Id = 27, }
         },
         {
             30,
-            new Song { Title = "in eu mi", Id = 30, }
+            new SongEntity { Title = "in eu mi", Id = 30, }
         },
         {
             31,
-            new Song { Title = "amet FacIlIsis", Id = 31, }
+            new SongEntity { Title = "amet FacIlIsis", Id = 31, }
         },
         {
             32,
-            new Song { Title = "Ipsum Dolor", Id = 32, }
+            new SongEntity { Title = "Ipsum Dolor", Id = 32, }
         },
         {
             33,
-            new Song { Title = "interdum", Id = 33, }
+            new SongEntity { Title = "interdum", Id = 33, }
         },
         {
             34,
-            new Song { Title = "mi eu", Id = 34, }
+            new SongEntity { Title = "mi eu", Id = 34, }
         },
         {
             35,
-            new Song { Title = "Malesuada", Id = 35, }
+            new SongEntity { Title = "Malesuada", Id = 35, }
         },
         {
             36,
-            new Song { Title = "Proin libEro", Id = 36, }
+            new SongEntity { Title = "Proin libEro", Id = 36, }
         },
         {
             37,
-            new Song { Title = "maluada", Id = 37, }
+            new SongEntity { Title = "maluada", Id = 37, }
         },
     };
 }

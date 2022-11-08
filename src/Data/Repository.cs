@@ -4,29 +4,29 @@ namespace Data;
 
 public interface IRepository
 {
-    List<Album> GetAllAlbums();
+    List<AlbumEntity> GetAllAlbums();
 
-    List<Artist> GetAllArtists();
+    List<ArtistEntity> GetAllArtists();
 
-    List<Song> GetAllSongs();
+    List<SongEntity> GetAllSongs();
 
-    Album GetAlbum(int albumId);
+    AlbumEntity GetAlbum(int albumId);
 
-    Artist GetArtist(int artistId);
+    ArtistEntity GetArtist(int artistId);
 
-    Song GetSong(int songId);
+    SongEntity GetSong(int songId);
 }
 
 public class Repository : IRepository
 {
-    private readonly IDictionary<int, Album> _albums;
-    private readonly IDictionary<int, Artist> _artists;
-    private readonly IDictionary<int, Song> _songs;
+    private readonly IDictionary<int, AlbumEntity> _albums;
+    private readonly IDictionary<int, ArtistEntity> _artists;
+    private readonly IDictionary<int, SongEntity> _songs;
 
     public Repository(
-        IDictionary<int, Album> albums,
-        IDictionary<int, Artist> artists,
-        IDictionary<int, Song> songs
+        IDictionary<int, AlbumEntity> albums,
+        IDictionary<int, ArtistEntity> artists,
+        IDictionary<int, SongEntity> songs
     )
     {
         _albums = albums;
@@ -34,32 +34,32 @@ public class Repository : IRepository
         _songs = songs;
     }
 
-    public List<Album> GetAllAlbums()
+    public List<AlbumEntity> GetAllAlbums()
     {
         throw new NotImplementedException();
     }
 
-    public List<Artist> GetAllArtists()
+    public List<ArtistEntity> GetAllArtists()
     {
         throw new NotImplementedException();
     }
 
-    public List<Song> GetAllSongs()
+    public List<SongEntity> GetAllSongs()
     {
         throw new NotImplementedException();
     }
 
-    public Album GetAlbum(int albumId)
+    public AlbumEntity GetAlbum(int albumId)
     {
         throw new NotImplementedException();
     }
 
-    public Artist GetArtist(int artistId)
+    public ArtistEntity GetArtist(int artistId)
     {
         throw new NotImplementedException();
     }
 
-    public Song GetSong(int songId)
+    public SongEntity GetSong(int songId)
     {
         throw new NotImplementedException();
     }

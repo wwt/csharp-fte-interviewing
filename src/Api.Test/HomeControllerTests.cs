@@ -5,6 +5,7 @@ using Data;
 using Moq;
 using System.Text.Json;
 using System.Collections.Generic;
+using Data.Models;
 
 namespace Api.Test;
 
@@ -25,9 +26,9 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 2001,
@@ -71,23 +72,23 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = artistId,
                         ReleaseDate = 2001,
                         Title = "My new album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 5473,
                         ReleaseDate = 2001,
                         Title = "Some other album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = artistId,
                         ReleaseDate = 1901,
@@ -98,13 +99,13 @@ public class HomeControllerTests
             );
         _mockRepository
             .Setup(m => m.GetArtist(artistId))
-            .Returns(new Data.Models.Artist { Id = artistId, Name = "No name person" });
+            .Returns(new ArtistEntity { Id = artistId, Name = "No name person" });
         _mockRepository
             .Setup(m => m.GetSong(songId1))
-            .Returns(new Data.Models.Song { Id = songId1, Title = "My first song" });
+            .Returns(new SongEntity { Id = songId1, Title = "My first song" });
         _mockRepository
             .Setup(m => m.GetSong(songId2))
-            .Returns(new Data.Models.Song { Id = songId2, Title = "My second song" });
+            .Returns(new SongEntity { Id = songId2, Title = "My second song" });
 
         var actual = await _testObject.GetAlbumsByArtist(artistId);
 
@@ -117,23 +118,23 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 2001,
                         Title = "My new album",
                         SongIds = new List<int> { 123 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 5473,
                         ReleaseDate = 2011,
                         Title = "Some other album",
                         SongIds = new List<int> { 15 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 1985,
@@ -176,23 +177,23 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 2001,
                         Title = "My new album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 5473,
                         ReleaseDate = 2011,
                         Title = "Some other album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 1985,
@@ -203,16 +204,16 @@ public class HomeControllerTests
             );
         _mockRepository
             .Setup(m => m.GetArtist(164))
-            .Returns(new Data.Models.Artist { Id = 164, Name = "Unknown person" });
+            .Returns(new ArtistEntity { Id = 164, Name = "Unknown person" });
         _mockRepository
             .Setup(m => m.GetArtist(5473))
-            .Returns(new Data.Models.Artist { Id = 5473, Name = "Random person" });
+            .Returns(new ArtistEntity { Id = 5473, Name = "Random person" });
         _mockRepository
             .Setup(m => m.GetSong(songId1))
-            .Returns(new Data.Models.Song { Id = songId1, Title = "My first song" });
+            .Returns(new SongEntity { Id = songId1, Title = "My first song" });
         _mockRepository
             .Setup(m => m.GetSong(songId2))
-            .Returns(new Data.Models.Song { Id = songId2, Title = "My second song" });
+            .Returns(new SongEntity { Id = songId2, Title = "My second song" });
 
         var actual = await _testObject.SearchByAlbumName("OtHEr");
 
@@ -225,10 +226,10 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllSongs())
             .Returns(
-                new List<Data.Models.Song>
+                new List<SongEntity>
                 {
-                    new Data.Models.Song { Title = "My first song", },
-                    new Data.Models.Song { Title = "My second song", },
+                    new SongEntity { Title = "My first song", },
+                    new SongEntity { Title = "My second song", },
                 }
             );
         var actual = await _testObject.SearchBySongName("not going to find it");
@@ -248,10 +249,10 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllSongs())
             .Returns(
-                new List<Data.Models.Song>
+                new List<SongEntity>
                 {
-                    new Data.Models.Song { Title = "My first song", },
-                    new Data.Models.Song { Title = "One hit wonder", },
+                    new SongEntity { Title = "My first song", },
+                    new SongEntity { Title = "One hit wonder", },
                 }
             );
 
@@ -266,9 +267,9 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 164,
                         ReleaseDate = 2001,
@@ -312,23 +313,23 @@ public class HomeControllerTests
         _mockRepository
             .Setup(m => m.GetAllAlbums())
             .Returns(
-                new List<Data.Models.Album>
+                new List<AlbumEntity>
                 {
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 123,
                         ReleaseDate = 2001,
                         Title = "My new album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 123,
                         ReleaseDate = 2001,
                         Title = "Some other album",
                         SongIds = new List<int> { songId1 }
                     },
-                    new Data.Models.Album
+                    new AlbumEntity
                     {
                         ArtistId = 123,
                         ReleaseDate = 1901,
@@ -339,13 +340,13 @@ public class HomeControllerTests
             );
         _mockRepository
             .Setup(m => m.GetArtist(123))
-            .Returns(new Data.Models.Artist { Id = 123, Name = "No name person" });
+            .Returns(new ArtistEntity { Id = 123, Name = "No name person" });
         _mockRepository
             .Setup(m => m.GetSong(songId1))
-            .Returns(new Data.Models.Song { Id = songId1, Title = "My first song" });
+            .Returns(new SongEntity { Id = songId1, Title = "My first song" });
         _mockRepository
             .Setup(m => m.GetSong(songId2))
-            .Returns(new Data.Models.Song { Id = songId2, Title = "My second song" });
+            .Returns(new SongEntity { Id = songId2, Title = "My second song" });
 
         var actual = await _testObject.GetAlbumsByYear(2001);
 
